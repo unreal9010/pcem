@@ -171,8 +171,8 @@ static void sound_cd_thread(void *param) {
                                         cd_buffer_temp[1] += cd_buffer[c + 1];
 
                                 /*Apply sound card CD volume*/
-                                cd_buffer_temp[0] = (cd_buffer_temp[0] * (int)cd_vol_l) / 65535;
-                                cd_buffer_temp[1] = (cd_buffer_temp[1] * (int)cd_vol_r) / 65535;
+                                cd_buffer_temp[0] = (cd_buffer_temp[0] * (int)cd_vol_l) / 32768;
+                                cd_buffer_temp[1] = (cd_buffer_temp[1] * (int)cd_vol_r) / 32768;
 
                                 if (cd_buffer_temp[0] > 32767)
                                         cd_buffer_temp[0] = 32767;
@@ -258,7 +258,7 @@ void sound_reset() {
 
         sound_handlers_num = 0;
 
-        sound_set_cd_volume(65535, 65535);
+        sound_set_cd_volume(32768, 32768);
         ioctl_audio_stop();
         image_audio_stop();
 }
